@@ -1,5 +1,7 @@
 import React from 'react'
 import {render} from 'react-dom'
+import Timer from './timer'
+// import wow from './wowwow.js'
 
 class App extends React.Component {
   render(){return(
@@ -7,4 +9,5 @@ class App extends React.Component {
   )}
 }
 
-render(<App/>, document.getElementById('app'));
+render(<Timer/>, document.getElementById('app'));
+// render(<App/>, document.getElementById('app'));
