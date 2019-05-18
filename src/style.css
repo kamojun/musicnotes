@@ -1,0 +1,11 @@
+.whiteKey,.blackKey{
+  pointer-events: all;
+}
+
+.whiteKey:hover,.blackKey:hover{
+  fill: red;
+}
+
+#test{
+  fill: red;
+}

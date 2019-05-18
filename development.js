@@ -23,6 +23,19 @@ export default {
         test: /\.jsx$/,           // 変換対象を正規表現で指定
         exclude: /node_modules/,  // node_modulesは全部jsなので除外?
         loader: 'babel-loader',   // babel-loaderを噛ませてjsにしてから、bundleに渡す
+      },
+      {
+        test: /\.css/,
+        use: [
+          "style-loader",
+          {
+            loader: "css-loader",
+            options: {
+              url: false,
+              //sourceMap: enabledSourceMap
+            }
+          }
+        ]
       }
     ]
   },
