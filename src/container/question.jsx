@@ -2,9 +2,12 @@ import React from 'react'
 import KeyBoard from './keyboard'
 
 class Question extends React.Component{
-  constructor(props){
-    super(props)
-  }
+  render(){return(
+    <div>
+      <p>{this.props.ans}</p>
+      <KeyBoard />
+    </div>
+  )}
 }
 
 function CorrectAnswer(e){

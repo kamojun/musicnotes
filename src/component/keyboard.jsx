@@ -13,8 +13,6 @@ export default function KeyBoard(props){
         <rect data-num={i+1} className="whiteKey" key={i} x={i*width} y="0" width={width} height={height}
           fill="none" stroke="black" strokeWidth="1"/>
         )}
-      </g>
-      <g onClick={click}>
         {[0,1,3,4,5].map(i=>
           <rect data-num={i+1.5} className="blackKey" key={i} x={offset+i*width} y="0" width={blackWidth} height={blackHeight}
           fill="black"/>
