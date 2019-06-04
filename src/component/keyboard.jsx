@@ -1,6 +1,7 @@
 import React from 'react';
+import { connect } from 'react-redux'
 
-export default function KeyBoard(props){
+function KeyBoard(props){
   const width = 50;
   const height = 200;
   const offset = 27;
@@ -8,7 +9,7 @@ export default function KeyBoard(props){
   const blackHeight = 130;
   return(<div>
     <svg height={height} width={width*7}>
-      <g onClick={click}>
+      <g onClick={() => props.dispatch({type: "REPLY", response: 'test'})}>
         {[...Array(7).keys()].map(i=>
         <rect data-num={i+1} className="whiteKey" key={i} x={i*width} y="0" width={width} height={height}
           fill="none" stroke="black" strokeWidth="1"/>
@@ -22,6 +23,4 @@ export default function KeyBoard(props){
   </div>)
 }
 
-function click(e){
-  console.log(e.target.dataset.num);
-}
+export default connect()(KeyBoard)

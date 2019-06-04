@@ -1,12 +1,15 @@
 const initialState = {
-  fuga: 1
+  ans: "レ"
 }
 
-export default function reducer(state = initialState, action) {
-  switch(action.type) {
-    case 'INCREMENT':
-      return { fuga: state.fuga + 1 }
-    default:
-      return state
-  }
-}
+// actionを受け取って何かする
+// export default function reducer(state = initialState, action) {
+//   switch(action.type) {
+//     case 'CORRECT':
+//       return { ans: "正解しました" }
+//     default:
+//       return state
+//   }
+// }
+
+// ↑なんか違う。CORRECTかどうかは、ここで判断するのが良いか?
