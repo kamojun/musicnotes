@@ -9,7 +9,7 @@ function KeyBoard(props){
   const blackHeight = 130;
   return(<div>
     <svg height={height} width={width*7}>
-      <g onClick={() => props.dispatch({type: "REPLY", response: 'test'})}>
+      <g onClick={(e) => props.dispatch({type: "REPLY", response: e.target.dataset.num})}>
         {[...Array(7).keys()].map(i=>
         <rect data-num={i+1} className="whiteKey" key={i} x={i*width} y="0" width={width} height={height}
           fill="none" stroke="black" strokeWidth="1"/>
@@ -23,4 +23,4 @@ function KeyBoard(props){
   </div>)
 }
 
-export default connect()(KeyBoard)
+export default connect()(KeyBoard) // こうすると、propsにはdispatchのみ入る。なぜだか。
