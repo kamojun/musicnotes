@@ -1,7 +1,7 @@
 import React from 'react';
-import { connect } from 'react-redux'
 
-function KeyBoard(props){
+// クリックされた時に何をするかは知らないキーボード
+function KeyBoard({onClick}){
   const width = 50;
   const height = 200;
   const offset = 27;
@@ -9,7 +9,8 @@ function KeyBoard(props){
   const blackHeight = 130;
   return(<div>
     <svg height={height} width={width*7}>
-      <g onClick={(e) => props.dispatch({type: "REPLY", response: e.target.dataset.num})}>
+      {/* <g onClick={(e) => props.dispatch({type: "REPLY", response: e.target.dataset.num})}> */}
+      <g onClick={onClick}>
         {[...Array(7).keys()].map(i=>
         <rect data-num={i+1} className="whiteKey" key={i} x={i*width} y="0" width={width} height={height}
           fill="none" stroke="black" strokeWidth="1"/>
@@ -22,5 +23,3 @@ function KeyBoard(props){
     </svg>
   </div>)
 }
-
-export default connect()(KeyBoard) // こうすると、propsにはdispatchのみ入る。なぜだか。

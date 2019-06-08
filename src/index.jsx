@@ -1,28 +1,29 @@
+import './style.css'
 import React from 'react'
 import {render} from 'react-dom'
-import { connect } from 'react-redux'
-import './style.css'
 
 import {createStore} from 'redux'
 import {Provider} from 'react-redux'
-import reducer from './reducer/question'
+import reducer from './reducer'
 
-import Question from './container/question'
-import KeyBoard from './component/keyboard'
-import Problem from './container/problem'
+// import KeyBoard from './container/keyboard'
+// import Problem from './container/problem'
+import Timer from './container/timer'
 
-const SomeUI = ({ dispatch }) => (
-  <button onClick={ () => dispatch({type:"REPLY", response: 1}) }>do something</button>
-)
-const Connected = connect()(SomeUI)
+// const SomeUI = ({ dispatch }) => (
+//   <button onClick={ () => dispatch({type:"REPLY", response: 1}) }>do something</button>
+// )
+// import { connect } from 'react-redux'
+// const Connected = connect()(SomeUI)
 const store = createStore(reducer, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__())
 
 render(
   <Provider store={store}>
     {/* <Question /> */}
     {/* <Connected /> */}
-    <Problem />
-    <KeyBoard />
+    <Timer />
+    {/* <Problem /> */}
+    {/* <KeyBoard /> */}
   </Provider>,
   document.getElementById('app')
 )

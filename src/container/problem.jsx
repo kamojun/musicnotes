@@ -10,8 +10,8 @@ function Problem({problems}){return(
 // コンポーネントの初期化にはpropsを渡すが、そのpropsとして、redux storeのstate
 // を渡しますよ、ということ。この場合だとそうなるが
 // 実際はstateをそのまま渡さなくても、いくらか加工して渡せる
-function mapStateToProps(state) {
-  return state
+function mapStateToProps({question}) {
+  return question
 }
 
 // state以外にも、別に関数を作ってある種のpropsとして渡すことができる。
