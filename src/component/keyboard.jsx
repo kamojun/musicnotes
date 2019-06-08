@@ -1,7 +1,7 @@
 import React from 'react';
 
 // クリックされた時に何をするかは知らないキーボード
-function KeyBoard({onClick}){
+export default function KeyBoard({onClick}){
   const width = 50;
   const height = 200;
   const offset = 27;

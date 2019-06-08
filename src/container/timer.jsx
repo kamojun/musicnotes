@@ -4,7 +4,7 @@ import {connect} from 'react-redux'
 function Timer({text, stopped, onStart, onStop, onReset}){return(
   <div>
     <p>{text}</p>
-    <button onClick={stopped ? onStart : onStop}>{stopped ? "スタート" : "ストップ"}</button>
+    <button id="timerbutton" onClick={stopped ? onStart : onStop}>{stopped ? "スタート" : "ストップ"}</button>
     <button onClick={onReset}>リセット</button>
   </div>
 )}

@@ -6,8 +6,8 @@ import {createStore} from 'redux'
 import {Provider} from 'react-redux'
 import reducer from './reducer'
 
-// import KeyBoard from './container/keyboard'
-// import Problem from './container/problem'
+import KeyBoard from './container/keyboard'
+import Problem from './container/problem'
 import Timer from './container/timer'
 
 // const SomeUI = ({ dispatch }) => (
@@ -22,8 +22,8 @@ render(
     {/* <Question /> */}
     {/* <Connected /> */}
     <Timer />
-    {/* <Problem /> */}
-    {/* <KeyBoard /> */}
+    <Problem />
+    <KeyBoard />
   </Provider>,
   document.getElementById('app')
 )

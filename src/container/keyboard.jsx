@@ -1,5 +1,5 @@
 import { connect } from 'react-redux'
-import KeyBoard from '../component/keyboard'
+import KeyBoard from '../component/keyboard.jsx'
 
 // クリックされたら、REPLYというアクションを送るようにしたもの
 function mapDispatchToProps(dispatch) {

@@ -1,30 +1,22 @@
 import React from 'react'
 import {connect} from 'react-redux'
 
-function Problem({problems}){return(
+function Problem({problems, finished}){return(
   <div>
-    <p>{problems[0].answer}</p>
+    <p>{problems.length > 0 ? problems[0].answer : finished ? "もう一回!" : "ここに問題"}</p>
   </div>
 )}
 
 // コンポーネントの初期化にはpropsを渡すが、そのpropsとして、redux storeのstate
 // を渡しますよ、ということ。この場合だとそうなるが
 // 実際はstateをそのまま渡さなくても、いくらか加工して渡せる
-function mapStateToProps({question}) {
-  return question
+function mapStateToProps({question:{problems, finished}}) {
+  if(finished){
+    document.getElementById('timerbutton').click();   // problem containerの方で、問題が終了したということをtimer containerに伝えたい。
+  }
+  return {problems, finished}
 }
 
-// state以外にも、別に関数を作ってある種のpropsとして渡すことができる。
-// つまりprops.handleClickという関数を、store.dispatchを用いて作っている。
-function mapDispatchToProps(dispatch) {
-  return {
-    handleClick: () =>{
-       dispatch({ type: 'CORRECT' })
-     }    // これで、propsにhandleClickが追加されるのかな
-  }
-}
-// export default connect(mapStateToProps, mapDispatchToProps)(Question);
-// export default connect()(Problem);
 export default connect(mapStateToProps)(Problem);
 
 // export default Fquestion
