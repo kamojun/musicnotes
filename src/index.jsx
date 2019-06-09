@@ -2,7 +2,7 @@ import './style.css'
 import React from 'react'
 import {render} from 'react-dom'
 
-import {createStore} from 'redux'
+import {createStore, applyMiddleware, compose} from 'redux'
 import {Provider} from 'react-redux'
 import reducer from './reducer'
 
@@ -10,18 +10,23 @@ import KeyBoard from './container/keyboard'
 import Problem from './container/problem'
 import Timer from './container/timer'
 
-// const SomeUI = ({ dispatch }) => (
-//   <button onClick={ () => dispatch({type:"REPLY", response: 1}) }>do something</button>
-// )
-// import { connect } from 'react-redux'
-// const Connected = connect()(SomeUI)
-const store = createStore(reducer, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__())
+function stopTimer({dispatch, getState}) {
+  return next => action => {
+    next(action)
+    if(getState().question.finished){
+      dispatch({type: "STOP"})
+    }
+  }
+}
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
+const store = createStore(reducer, composeEnhancers(applyMiddleware(stopTimer)))
+// const store = createStore(reducer, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__())
 
 render(
   <Provider store={store}>
     {/* <Question /> */}
     {/* <Connected /> */}
-    <Timer />
+    {/* <Timer /> */}
     <Problem />
     <KeyBoard />
   </Provider>,
