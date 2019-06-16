@@ -12,9 +12,9 @@ import Timer from './container/timer'
 
 function stopTimer({dispatch, getState}) {
   return next => action => {
-    next(action)
-    if(getState().question.finished){
-      dispatch({type: "STOP"})
+    next(action)   // とりあえず正規のreducerを呼び出す
+    if(getState().question.hasJustFinished){   // その結果問題が終了した時
+      dispatch({type: "STOP"})          // STOPアクション
     }
   }
 }
@@ -24,11 +24,8 @@ const store = createStore(reducer, composeEnhancers(applyMiddleware(stopTimer)))
 
 render(
   <Provider store={store}>
-    {/* <Question /> */}
-    {/* <Connected /> */}
-    {/* <Timer /> */}
     <Problem />
-    <KeyBoard />
+    <KeyBoard keyNums={[-3, -2, -1, 0, 1, 2, 3]}/>
   </Provider>,
   document.getElementById('app')
 )

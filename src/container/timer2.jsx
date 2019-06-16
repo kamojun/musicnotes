@@ -2,9 +2,9 @@ import React from 'react'
 import {connect} from 'react-redux'
 
 function Timer({text, started, onStart, onReset}){return(
-  <span>
+  <span id={'timer'}>
     <button onClick={started ? onReset : onStart}>{started ? "リセット" : "スタート"}</button>
-    <span>{text}</span>
+    &nbsp;<span>{text}</span>
   </span>
 )}
 
