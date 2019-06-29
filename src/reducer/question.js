@@ -1,5 +1,14 @@
 function createProblems(num){
-  return [...Array(num).keys()].map(i=>({problem: i+1, answer:`0,${i+1}`}))
+  // return [...Array(num).keys()].map(i=>({problem: i+1, answer:`0,${i+1}`}))
+  return [...Array(num)].map(_ => GetRandom(NoteNums)).map(i => ({problem: i, answer:`${i}`}))
+}
+
+const NoteNums = [1,2,3,4,5,6,7,11,12,13,14,15]
+function GetRandom(arr){
+  const len = arr.length
+  const index = Math.max(0, Math.min(len, Math.floor(len*Math.random())))
+  console.log(index, arr[index])
+  return arr[index]
 }
 
 const defaultState = {
@@ -17,7 +26,7 @@ const defaultState = {
 // まあここまでしなくても良い気もしなくもない。
 export default function({problems, timerOn, hasJustFinished, numCycle} = defaultState, action){return(
   action.type==="START" ?   // 開始するとき
-    {problems: createProblems(7), timerOn:true, hasJustFinished:false, numCycle} :
+    {problems: createProblems(10), timerOn:true, hasJustFinished:false, numCycle} :
   action.type==="RESET" || action.type==="STOP" ?   // questionとしてはこの２つは区別しない
     {problems: [], timerOn:false, hasJustFinished:false, numCycle:numCycle+1} :
   action.type==="REPLY" && timerOn && action.response===problems[0].answer ?   // 正答した時

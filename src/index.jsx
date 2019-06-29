@@ -8,7 +8,8 @@ import reducer from './reducer'
 
 import KeyBoard from './container/keyboard'
 import Problem from './container/problem'
-import Timer from './container/timer'
+import Timer from './container/timer2'
+import Notes from './container/notes'
 
 function stopTimer({dispatch, getState}) {
   return next => action => {
@@ -24,8 +25,9 @@ const store = createStore(reducer, composeEnhancers(applyMiddleware(stopTimer)))
 
 render(
   <Provider store={store}>
-    <Problem />
+    <Timer defaultText=""/>
     <KeyBoard keyNums={[-3, -2, -1, 0, 1, 2, 3]}/>
+    <Notes />
   </Provider>,
   document.getElementById('app')
 )

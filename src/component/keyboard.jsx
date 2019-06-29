@@ -22,11 +22,11 @@ export default function KeyBoard({onClick, keyNums}){
 function _keys({id, x, width, height, offset, blackWidth, blackHeight, onClick}){return(
   <g onClick={onClick}>
     {[...Array(7).keys()].map(i=>
-    <rect data-num={[id,i+1]} className="whiteKey" key={i} x={x+i*width} y="0" width={width} height={height}
+    <rect data-num={id*10+i+1} className="whiteKey" key={i} x={x+i*width} y="0" width={width} height={height}
       fill="none" stroke="black" strokeWidth="1"/>
     )}
     {[0,1,3,4,5].map(i=>
-      <rect data-num={[id,i+1.5]} className="blackKey" key={i} x={x+offset+i*width} y="0" width={blackWidth} height={blackHeight}
+      <rect data-num={id*10+i+1.5} className="blackKey" key={i} x={x+offset+i*width} y="0" width={blackWidth} height={blackHeight}
       fill="black"/>
     )}
   </g>

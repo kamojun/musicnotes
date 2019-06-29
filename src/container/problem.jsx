@@ -17,5 +17,3 @@ function mapStateToProps({question}) {
 }
 
 export default connect(mapStateToProps)(Problem);
-
-// export default Fquestion
