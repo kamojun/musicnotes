@@ -1,14 +1,30 @@
 function createProblems(num){
   // return [...Array(num).keys()].map(i=>({problem: i+1, answer:`0,${i+1}`}))
-  return [...Array(num)].map(_ => GetRandom(NoteNums)).map(i => ({problem: i, answer:`${i}`}))
+  // return [...Array(num)].map(_ => GetRandom(NoteNums)).map(i => ({problem: i, answer:`${i}`}))
+  return [...Permutation(NoteNums, null)].map(i => ({problem: i, answer:`${i}`}))
 }
 
-const NoteNums = [1,2,3,4,5,6,7,11,12,13,14,15]
+const NoteNums = [-6,-5,-4,-3,-6,-5,-4,-3,1,2,3,4,5,6,7,11,12,13,14,15,16,17,21,22,23,14,15,16,17,21,22,23]
 function GetRandom(arr){
   const len = arr.length
   const index = Math.max(0, Math.min(len, Math.floor(len*Math.random())))
   console.log(index, arr[index])
   return arr[index]
+}
+
+function* Permutation(arr,last=null){
+  const len = arr.length
+  if(len > 0){
+    const index = Math.max(0, Math.min(len, Math.floor(len*Math.random())))
+    const now = arr[index]
+    if(last===now){
+      yield* Permutation(arr, last)
+    }
+    else{
+      yield now
+      yield* Permutation([...arr.slice(0, index), ...arr.slice(index+1)], now)
+    }
+  }
 }
 
 const defaultState = {
