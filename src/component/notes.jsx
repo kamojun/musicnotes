@@ -1,7 +1,7 @@
 import React from 'react';
 
 function GCref(props){return(
-  <g {...props}>
+  <g id="GCref" {...props}>
     <g transform="translate(-80,2) scale(1.1,1.25)">
       <path style={{fill:"#000000"}} d="M366.789,307.317c0-47.676-38.65-86.326-86.333-86.326c-1.966,0-3.872,0.194-5.787,0.344
         c-1.84-14.581-3.619-28.75-5.287-42.12c20.249-14.611,40.594-28.698,55.863-43.742C379.823,81.719,364.075,0,298.918,0
@@ -48,8 +48,8 @@ function Lines(props){return(
   </g>
 )}
 function GCrefWithLines({children}){return(
-  <div>
-    <svg viewBox="0 0 1512 1512" width="200" height="200">
+  <div id="Notes">
+    <svg viewBox="0 0 1512 1200" width="200" height="150">
       <g transform="translate(0,300)">
         <GCref transform="translate(50)"/>
         <Lines />
@@ -60,7 +60,7 @@ function GCrefWithLines({children}){return(
 )}
 function FCrefWithLines({children}){return(
   <div>
-    <svg viewBox="0 0 1512 1512" width="200" height="200">
+    <svg viewBox="0 0 1512 1512" width="200" height="130">
       <g transform="translate(0,350)">
         <FCref transform="translate(50)"/>
         <Lines />
@@ -70,7 +70,7 @@ function FCrefWithLines({children}){return(
   </div>
 )}
 const QuarterNote = ({up}) => (
-  <g transform={up ? "rotate(180)" : ""}>
+  <g transform={up ? "rotate(180)" : "translate(60)"}>
     <circle
       transform="rotate(-30) scale(65,48)"
       r="1" fill="black"/>
@@ -92,8 +92,8 @@ const QuarterNoteUp = (props) => (
     <QuarterNote up={true}/>
   </g>
 )
-function ShortLine({height, width}){return(
-  <g transform={`translate(0,${height})`}>
+function ShortLine({height, width, xdiv=0}){return(
+  <g transform={`translate(${xdiv},${height})`}>
     <rect x="-150"y="-3" height="6" width={width}/>
   </g>
 )}
@@ -112,7 +112,7 @@ function WrittenNote({note}){
     const shortlines_down = [...Array(floormax((height-500)/100)).keys()].map(i => 600+100*i)
     return(
       <g transform={`translate(${x_position})`}>
-        {shortlines_up.map((h,i) => <ShortLine height={h} key={i} width="300"/>)}
+        {shortlines_up.map((h,i) => <ShortLine height={h} key={i} width="300" xdiv="60"/>)}
         {shortlines_down.map((h,i) => <ShortLine height={h} key={i} width="300"/>)}
         {height>=400 ?
           <QuarterNoteUp transform={`translate(0,${height})`}/> :

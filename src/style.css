@@ -6,20 +6,6 @@
   fill: red;
 }
 
-body{
-  background-color: gray;
-}
-
-#main {
-  padding: 20px;
-  background-color: white;
-  margin: auto;
-}
-
 #app {
   text-align: center;
-}
-
-#keyboard, #timer{
-  padding: 20px;
 }

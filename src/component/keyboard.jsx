@@ -2,15 +2,16 @@ import React from 'react';
 
 // クリックされた時に何をするかは知らないキーボード
 export default function KeyBoard({onClick, keyNums}){
-  const mag = 1.5;
+  const mag = 3.7;
+  const height_mag = .6
   const sizes = {
     width: 12*mag,
-    height: 40*mag,
+    height: 40*mag*height_mag,
     offset: 8*mag,
     blackWidth: 8*mag,
-    blackHeight: 26*mag,
+    blackHeight: 26*mag*height_mag*.9,
   }
-  return(<div id={'keyboard'}>
+  return(<div style={{display: "inline-block", width:"100%"}}>
     <svg height={sizes.height} width={sizes.width*7*keyNums.length}>
       {keyNums.map((i,j)=>
         <_keys id={i} key={j} x={sizes.width*7*j} onClick={onClick} {...sizes}/>

@@ -44,7 +44,7 @@
 
 
 <g transform="translate(500)">
-<g transform="translate(500,450)">
+<g transform="translate(590,450)">
   <g id="quarter-note-up" transform="rotate(180)">
     <circle
       transform="rotate(-30) scale(65,48)"

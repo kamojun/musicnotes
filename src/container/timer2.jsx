@@ -2,10 +2,10 @@ import React from 'react'
 import {connect} from 'react-redux'
 
 function Timer({text, started, onStart, onReset}){return(
-  <span id={'timer'}>
+  <div id='timer'>
     <button onClick={started ? onReset : onStart}>{started ? "リセット" : "スタート"}</button>
     &nbsp;<span>{text}</span>
-  </span>
+  </div>
 )}
 
 function mapStateToProps({timer:{start_time, elapsed_time}}, {defaultText}) {return(

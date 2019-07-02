@@ -26,8 +26,15 @@ const store = createStore(reducer, composeEnhancers(applyMiddleware(stopTimer)))
 render(
   <Provider store={store}>
     <Timer defaultText=""/>
-    <KeyBoard keyNums={[-3, -2, -1, 0, 1, 2, 3]}/>
     <Notes />
+    <KeyBoard keyNums={[2]}/>
+    <br/>
+    <KeyBoard keyNums={[1]}/>
+    <br/>
+    <KeyBoard keyNums={[0]}/>
+    <br/>
+    <KeyBoard keyNums={[-1]}/>
   </Provider>,
   document.getElementById('app')
 )
+document.getElementById("timer").addEventListener("click", ()=>{window.location.href="#Notes"})
