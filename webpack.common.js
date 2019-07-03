@@ -1,20 +1,21 @@
-import path from 'path'
-// import webpack from 'webpack'
-import HtmlWebpackPlugin from 'html-webpack-plugin'
+const path = require('path');
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+
+// import path from 'path'
+// // import webpack from 'webpack'
+// import HtmlWebpackPlugin from 'html-webpack-plugin'
+// import { CleanWebpackPlugin } from 'clean-webpack-plugin'
 
 const src = path.resolve(__dirname, 'src')
 const dist = path.resolve(__dirname, 'dist')
-
-export default {
-  mode: 'production',
-  //entry: src + '/index.jsx',
+module.exports = {
+  // mode: 'development',
   entry: path.resolve(src, 'index.jsx'),
-
   output: {
-    path: path.resolve(__dirname, "build"),
+    path: dist,
     filename: 'bundle.js',
   },
-
   // 本来jsしか理解しないwebpackに対し、moduleという翻訳機を噛ませて、例えばjsxとかも理解させる
   // その翻訳ルールがrules?
   module: {
@@ -45,7 +46,7 @@ export default {
   },
 
   plugins: [
-    // new webpack.SourceMapDevToolPlugin({}),
+    new CleanWebpackPlugin(),
     new HtmlWebpackPlugin({
       template: src+'/index.html',
       filename: 'index.html'
