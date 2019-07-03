@@ -1,8 +1,8 @@
-.whiteKey,.blackKey{
+.pianokey{
   pointer-events: all;
 }
 
-.whiteKey:hover,.blackKey:hover{
+.pianokey:hover{
   fill: red;
 }
 

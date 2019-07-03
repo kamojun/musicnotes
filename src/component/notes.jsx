@@ -98,16 +98,15 @@ function ShortLine({height, width, xdiv=0}){return(
   </g>
 )}
 const floormax = h => Math.max(0, Math.floor(h))
-function WrittenNote({note}){
-  if(note===null){
+function WrittenNote({midi}){
+  if(midi===null){
     return null
   }
   else{
-    const [height_of_0, space,x_position] = [650, 50,700]
-    const scale = Math.floor(note/10)
-    const inner = note - 10*scale
-    const abs = scale*7 + inner
-    const height = height_of_0 - abs*space
+    const [height_of_0, key_space, octave_space, x_position] = [2350, -50, -350, 700]
+    const key = midi % 12
+    const octave = Math.floor(midi/12)
+    const height = height_of_0 + [0,0,1,1,2,3,3,4,4,5,5,6][key]*key_space + octave*octave_space
     const shortlines_up = [...Array(floormax((100-height)/100)).keys()].map(i => -100*i)
     const shortlines_down = [...Array(floormax((height-500)/100)).keys()].map(i => 600+100*i)
     return(
@@ -122,8 +121,8 @@ function WrittenNote({note}){
     )
   }
 }
-export default function Notes({note}){return(
+export default function Notes({midi}){return(
   <GCrefWithLines>
-    <WrittenNote note={note} />
+    <WrittenNote {...{midi}} />
   </GCrefWithLines>
 )}

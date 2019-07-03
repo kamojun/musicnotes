@@ -3,32 +3,58 @@ import React from 'react';
 // クリックされた時に何をするかは知らないキーボード
 export default function KeyBoard({onClick, keyNums}){
   const mag = 3.7;
-  const height_mag = .6
-  const sizes = {
+  const whitesizes = {
     width: 12*mag,
-    height: 40*mag*height_mag,
+    height: 40*mag,
+  }
+  const blacksizes = {
     offset: 8*mag,
-    blackWidth: 8*mag,
-    blackHeight: 26*mag*height_mag*.9,
+    width: 8*mag,
+    height: 26*mag,
+    whiteWidth: whitesizes.width,
+  }
+  const keysize = {
+    width: whitesizes.width*7*keyNums.length,
+    height: whitesizes.height,
   }
   return(<div style={{display: "inline-block", width:"100%"}}>
-    <svg height={sizes.height} width={sizes.width*7*keyNums.length}>
-      {keyNums.map((i,j)=>
-        <_keys id={i} key={j} x={sizes.width*7*j} onClick={onClick} {...sizes}/>
+    <svg {...keysize}>
+      {keyNums.map((octaveMidi, j) =>
+        <g key={j} onClick={onClick}>
+          <WhiteKeys x={keysize.width*j} {...{octaveMidi, ...whitesizes}}/>
+          <BlackKeys x={keysize.width*j} {...{octaveMidi, ...blacksizes}}/>
+        </g>
       )}
     </svg>
   </div>)
 }
 
-function _keys({id, x, width, height, offset, blackWidth, blackHeight, onClick}){return(
-  <g onClick={onClick}>
-    {[...Array(7).keys()].map(i=>
-    <rect data-num={id*10+i+1} className="whiteKey" key={i} x={x+i*width} y="0" width={width} height={height}
-      fill="none" stroke="black" strokeWidth="1"/>
-    )}
-    {[0,1,3,4,5].map(i=>
-      <rect data-num={id*10+i+1.5} className="blackKey" key={i} x={x+offset+i*width} y="0" width={blackWidth} height={blackHeight}
-      fill="black"/>
-    )}
-  </g>
-)}
+function PianoKey(props){
+  const {midi, color, ...others} = props;
+  return(
+    <rect
+      {...others}
+      className="pianokey"
+      data-midi={midi}
+      y="0" fill={color==="white" ? "none" : "black"} stroke="black" strokeWidth="1"
+    />
+  )
+}
+function WhiteKeys({x, width, height, octaveMidi}){
+  const whiteKeyMidi = [0,2,4,5,7,9,11]
+  const position = [0,1,2,3,4,5,6]
+  return(
+    <g>
+      {position.map((p, i)=><PianoKey key={i} color="white" midi={whiteKeyMidi[i]+octaveMidi} {...{width, height}} x={x+p*width}/>)}
+    </g>
+  )
+}
+function BlackKeys({x, width, height, octaveMidi, offset, whiteWidth}){
+  const blackKeyMIDI = [1,3,6,8,10]
+  const position = [0,1,3,4,5]
+  return(
+    <g>
+      {position.map((p, i)=><PianoKey key={i} color="black" midi={blackKeyMIDI[i]+octaveMidi} {...{width, height}} x={x+p*whiteWidth+offset}/>)}
+    </g>
+  )
+}

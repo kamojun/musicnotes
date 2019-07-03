@@ -7,7 +7,6 @@ import {Provider} from 'react-redux'
 import reducer from './reducer'
 
 import KeyBoard from './container/keyboard'
-import Problem from './container/problem'
 import Timer from './container/timer2'
 import Notes from './container/notes'
 
@@ -27,13 +26,7 @@ render(
   <Provider store={store}>
     <Timer defaultText=""/>
     <Notes />
-    <KeyBoard keyNums={[2]}/>
-    <br/>
-    <KeyBoard keyNums={[1]}/>
-    <br/>
     <KeyBoard keyNums={[0]}/>
-    <br/>
-    <KeyBoard keyNums={[-1]}/>
   </Provider>,
   document.getElementById('app')
 )
