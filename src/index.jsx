@@ -24,7 +24,7 @@ const store = createStore(reducer, composeEnhancers(applyMiddleware(stopTimer)))
 
 render(
   <Provider store={store}>
-    <Timer defaultText=""/>
+    <Timer defaultText="35題"/>
     <Notes />
     <KeyBoard keyNums={[0]}/>
   </Provider>,

@@ -49,7 +49,7 @@ function Lines(props){return(
 )}
 function GCrefWithLines({children}){return(
   <div id="Notes">
-    <svg viewBox="0 0 1512 1200" width="200" height="150">
+    <svg viewBox="0 0 2100 1400" width="300" height="200">
       <g transform="translate(0,300)">
         <GCref transform="translate(50)"/>
         <Lines />
@@ -60,7 +60,7 @@ function GCrefWithLines({children}){return(
 )}
 function FCrefWithLines({children}){return(
   <div>
-    <svg viewBox="0 0 1512 1512" width="200" height="130">
+    <svg viewBox="0 0 1000 1000" width="300" height="130">
       <g transform="translate(0,350)">
         <FCref transform="translate(50)"/>
         <Lines />
@@ -98,19 +98,19 @@ function ShortLine({height, width, xdiv=0}){return(
   </g>
 )}
 const floormax = h => Math.max(0, Math.floor(h))
-function WrittenNote({midi}){
+function WrittenNote({midi, x}){
   if(midi===null){
     return null
   }
   else{
-    const [height_of_0, key_space, octave_space, x_position] = [2350, -50, -350, 700]
+    const [height_of_0, key_space, octave_space] = [2350, -50, -350]
     const key = midi % 12
     const octave = Math.floor(midi/12)
     const height = height_of_0 + [0,0,1,1,2,3,3,4,4,5,5,6][key]*key_space + octave*octave_space
     const shortlines_up = [...Array(floormax((100-height)/100)).keys()].map(i => -100*i)
     const shortlines_down = [...Array(floormax((height-500)/100)).keys()].map(i => 600+100*i)
     return(
-      <g transform={`translate(${x_position})`}>
+      <g transform={`translate(${x})`}>
         {shortlines_up.map((h,i) => <ShortLine height={h} key={i} width="300" xdiv="60"/>)}
         {shortlines_down.map((h,i) => <ShortLine height={h} key={i} width="300"/>)}
         {height>=400 ?
@@ -121,8 +121,8 @@ function WrittenNote({midi}){
     )
   }
 }
-export default function Notes({midi}){return(
+export default function Notes({midis}){return(
   <GCrefWithLines>
-    <WrittenNote {...{midi}} />
+    {midis.map((midi,i) => <WrittenNote key={i} x={550+i*300} {...{midi}} />)}
   </GCrefWithLines>
 )}

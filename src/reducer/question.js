@@ -1,4 +1,4 @@
-function createProblems(num){
+function createProblems(){
   // return [...Array(num).keys()].map(i=>({problem: i+1, answer:`0,${i+1}`}))
   // return [...Array(num)].map(_ => GetRandom(NoteNums)).map(i => ({problem: i, answer:`${i}`}))
   return [...Permutation(Midis, null)].map(i => ({problem: i, answer:`${i%12}`}))   // 問題はmidi, answerはkey
@@ -42,11 +42,11 @@ const defaultState = {
 // するとさらにfunction({})はfunction({problems=[], started=false})
 // となってもう一度呼び直される。ということかな。どうしても変な書き方になる
 // まあここまでしなくても良い気もしなくもない。
-export default function({problems, timerOn, hasJustFinished, numCycle} = defaultState, action){return(
+export default function({problems, timerOn, hasJustFinished, numCycle, } = defaultState, action){return(
   action.type==="START" ?   // 開始するとき
-    {problems: createProblems(10), timerOn:true, hasJustFinished:false, numCycle} :
+    {problems: createProblems(), timerOn:true, hasJustFinished:false, numCycle, } :
   action.type==="RESET" || action.type==="STOP" ?   // questionとしてはこの２つは区別しない
-    {problems: [], timerOn:false, hasJustFinished:false, numCycle:numCycle+1} :
+    {problems: [], timerOn:false, hasJustFinished:false, numCycle:numCycle+1, } :
   action.type==="REPLY" && timerOn && action.response===problems[0].answer ?   // 正答した時
     {
       problems: problems.slice(1),
@@ -54,5 +54,5 @@ export default function({problems, timerOn, hasJustFinished, numCycle} = default
       hasJustFinished: problems.length===1 ? true : false,
       numCycle
     } :
-  {problems, timerOn, hasJustFinished, numCycle}   // 誤答した時など
+  {problems, timerOn, hasJustFinished, numCycle, }   // 誤答した時など
 )}

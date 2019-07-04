@@ -8,12 +8,12 @@ function Timer({text, started, onStart, onReset}){return(
   </div>
 )}
 
-function mapStateToProps({timer:{start_time, elapsed_time}}, {defaultText}) {return(
+function mapStateToProps({timer:{start_time, elapsed_time}, question:{problems}}, {defaultText}) {return(
   start_time===null ?
     elapsed_time===null ?
      {text: defaultText, started: false} :
      {text: `${Math.floor((elapsed_time)/1000)}秒`, started: false} :
-    {text: '計測中', started: true}
+    {text: `計測中`, started: true}
 )}
 
 function mapDispatchToProps(dispatch) {
