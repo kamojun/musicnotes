@@ -9,6 +9,8 @@ import reducer from './reducer'
 import KeyBoard from './container/keyboard'
 import Timer from './container/timer2'
 import Notes from './container/notes'
+import KeyPanel from './container/keypanel'
+import UISelector from './component/uiselector.jsx'
 
 function stopTimer({dispatch, getState}) {
   return next => action => {
@@ -26,7 +28,10 @@ render(
   <Provider store={store}>
     <Timer defaultText="35題"/>
     <Notes />
-    <KeyBoard keyNums={[0]}/>
+    <UISelector>
+      {/* <KeyBoard keyNums={[0]}/> */}
+      <KeyPanel />
+    </UISelector>
   </Provider>,
   document.getElementById('app')
 )
