@@ -7,7 +7,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "webpack-dev-server --watch-content-base --hot --open firefox",
     "build": "webpack --config webpack.prod.js",
-    "deploy": "gh-pages -d ./build"
+    "deploy": "gh-pages -d ./docs"
   },
   "keywords": [],
   "author": "",
