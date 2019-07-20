@@ -1,12 +1,19 @@
 function createProblems(){
   // return [...Array(num).keys()].map(i=>({problem: i+1, answer:`0,${i+1}`}))
   // return [...Array(num)].map(_ => GetRandom(NoteNums)).map(i => ({problem: i, answer:`${i}`}))
-  return [...Permutation(Midis, null)].map(i => ({problem: i, answer:`${i%12}`}))   // 問題はmidi, answerはkey
+  return [...Permutation(Midis)].map(midi => ({problem: midiToNote(midi), answer:`${midi%12}`}))   // 問題はmidi, answerはkey
 }
 
 // const NoteNums = [-6,-5,-4,-3,-6,-5,-4,-3,1,2,3,4,5,6,7,11,12,13,14,15,16,17,21,22,23,14,15,16,17,21,22,23]
 const octave = [0,2,4,5,7,9,11]
 const Midis = [53,55,57,59,53,55,57,59,...octave.map(i=>i+60),...octave.map(i=>i+72),84,86,88,...octave.map(i=>i+72),84,86,88,]
+const midiToNote = midi => ({
+  octave: Math.floor(midi/12)-1,
+  keyName: "CCDDEFFGGAAB"[midi%12],
+  accidental: 0,
+  modulation: "C",
+  clef: "G",
+})
 function GetRandom(arr){
   const len = arr.length
   const index = Math.max(0, Math.min(len, Math.floor(len*Math.random())))
