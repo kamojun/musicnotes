@@ -1,0 +1,8 @@
+<svg width="400" height="110">
+    <g transform="rotate(50) translate(50, 30)">
+        <circle r="10" fill="red"/>
+        <text dominantBaseline="central" fontFamily="Verdana" fontSize="10" textAnchor="middle" transform="rotate(-50)">
+            あ
+        </text>
+    </g>
+</svg>

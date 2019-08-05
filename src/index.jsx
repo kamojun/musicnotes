@@ -1,22 +1,22 @@
 import './style.css'
 import React from 'react'
-import {render} from 'react-dom'
+import { render } from 'react-dom'
 
-import {createStore, applyMiddleware, compose} from 'redux'
-import {Provider} from 'react-redux'
+import { createStore, applyMiddleware, compose } from 'redux'
+import { Provider } from 'react-redux'
 import reducer from './reducer'
 
 import KeyBoard from './container/keyboard'
 import Timer from './container/timer2'
 import Notes from './container/notes'
 import KeyPanel from './container/keypanel'
-import UISelector from './component/uiselector.jsx'
+import UISelector from './container/uiselector.jsx'
 
-function stopTimer({dispatch, getState}) {
+function stopTimer({ dispatch, getState }) {
   return next => action => {
     next(action)   // とりあえず正規のreducerを呼び出す
-    if(getState().question.hasJustFinished){   // その結果問題が終了した時
-      dispatch({type: "STOP"})          // STOPアクション
+    if (getState().question.hasJustFinished) {   // その結果問題が終了した時
+      dispatch({ type: "STOP" })          // STOPアクション
     }
   }
 }
@@ -26,13 +26,13 @@ const store = createStore(reducer, composeEnhancers(applyMiddleware(stopTimer)))
 
 render(
   <Provider store={store}>
-    <Timer defaultText="35題"/>
+    <Timer defaultText="35題" />
     <Notes />
-    <UISelector>
-      {/* <KeyBoard keyNums={[0]}/> */}
+    <UISelector childlist={['キーボード', 'ボタン']}>
+      <KeyBoard keyNums={[0]} />
       <KeyPanel />
     </UISelector>
   </Provider>,
   document.getElementById('app')
 )
-document.getElementById("timer").addEventListener("click", ()=>{window.location.href="#Notes"})
+document.getElementById("timer").addEventListener("click", () => { window.location.href = "#Notes" })
