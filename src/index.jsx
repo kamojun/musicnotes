@@ -26,7 +26,7 @@ const store = createStore(reducer, composeEnhancers(applyMiddleware(stopTimer)))
 
 render(
   <Provider store={store}>
-    <Timer defaultText="35題" />
+    <Timer defaultText="36題" />
     <Notes />
     <UISelector childlist={['キーボード', 'ボタン']}>
       <KeyBoard keyNums={[0]} />

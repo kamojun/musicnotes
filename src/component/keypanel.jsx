@@ -13,7 +13,7 @@ const OnClickSVG = ({ width, height, origin, onClick, children }) => (
 
 const [width, height] = [300, 220]
 const origin = { x: 150, y: 110 }
-const [fontsize, radius] = [30, 30]
+const [fontsize, radius] = [30, 25]
 const KeyCircle = ({ onClick }) => (
   <OnClickSVG {...{ width, height, origin }} onClick={onClick}>
     {[[0, "C"], [2, "D"], [4, "E"], [5, "F"], [7, "G"], [9, "A"], [11, "B"]].map(([midi, name], i) =>
@@ -21,6 +21,20 @@ const KeyCircle = ({ onClick }) => (
         fontSize={fontsize} key={i}
         midi={midi} r={radius}
         y="-80" x="0" arg={360 * i / 7}
+      >{name}</PanelKey>
+    )}
+    {[[1, "C♯D♭"], [3, "D♯E♭"]].map(([midi, name], i) => !midi ? null :
+      <PanelKey
+        fontSize={fontsize / 4} key={i}
+        midi={midi} r={radius / 1.7}
+        y="-35" x="0" arg={360 / 14 * ((i * 2 - 1) * 1.2 + 2)}
+      >{name}</PanelKey>
+    )}
+    {[[6, "F♯G♭"], [8, "G♯A♭"], [10, "A♯B♭"]].map(([midi, name], i) => !midi ? null :
+      <PanelKey
+        fontSize={fontsize / 4} key={i}
+        midi={midi} r={radius / 1.7}
+        y="-35" x="0" arg={360 / 14 * ((i * 2 - 2) * 1.2 + 9)}
       >{name}</PanelKey>
     )}
   </OnClickSVG>

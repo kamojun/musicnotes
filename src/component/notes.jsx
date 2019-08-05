@@ -80,16 +80,41 @@ function ShortLine({height, width, xdiv=0}){return(
   <g transform={`translate(${xdiv},${height})`}>
     <rect x="-150"y="-3" height="6" width={width}/>
   </g>
-)}
+)
+}
+const Sharp = ({x=0,y=0, size=190}) => (
+  <g transform={`translate(${x}, ${y}) skewY(-5) scale(0.8, 1)`}>
+    <text
+      textAnchor="middle"
+      dominantBaseline="central"
+      fontSize={size}
+      fontFamily='Ludica Sans Unicode'>
+      ♯
+      </text>
+    <circle r="1" />
+  </g>
+)
+const Flat = ({ x = 0, y = 0, size = 180 }) => (
+  <g transform={`translate(${x}, ${y}) translate(0, -35) skewY(-5)`}>
+    <text
+      textAnchor="middle"
+      dominantBaseline="central"
+      fontSize={size}
+      fontFamily='Ludica Sans Unicode'>
+      ♭
+      </text>
+    <circle r="1" />
+  </g>
+)
 const floormax = h => Math.max(0, Math.floor(h))
 const getHeight = (octave, keyName) => {
   // {octave:0, keyName:0} からの高さ(五線譜の幅の何倍か)
   return keyName + octave*7
 }
-function WrittenNote({x, octave, keyName}){
+function WrittenNote({x, octave, keyName, accidental}){
   const [height_of_0, key_space] = [2000, -50]
   const keyHeight = ({C:0,D:1,E:2,F:3,G:4,A:5,B:6})[keyName]
-  const height = height_of_0 + (octave*7 + keyHeight)*key_space
+  const height = height_of_0 + (octave * 7 + keyHeight) * key_space
   const shortlines_up = [...Array(floormax((100-height)/100)).keys()].map(i => -100*i)
   const shortlines_down = [...Array(floormax((height-500)/100)).keys()].map(i => 600+100*i)
   return(
@@ -99,6 +124,12 @@ function WrittenNote({x, octave, keyName}){
       {height>=400 ?
         <QuarterNoteUp transform={`translate(0,${height})`}/> :
         <QuarterNoteDown transform={`translate(0,${height})`}/>
+      }
+      {accidental === 0 ?
+        null :
+        accidental === 1 ?
+          <Sharp y={height} x={height>= 400 ? -130 : -80}/> :
+          <Flat y={height} x={height >= 400 ? -130 : -80}/>
       }
     </g>
   )
@@ -111,7 +142,7 @@ export default function Notes({modulation, clef, notes}){return(
     <Modulation keyName={modulation}/>
     {notes.map((note, i) => (
       note === null ? null : 
-      <WrittenNote key={i} x={550+i*300} {...note} />
+      <WrittenNote key={i} x={550+i*400} {...note} />
     ))}
   </ClefWithLines>
 )}
